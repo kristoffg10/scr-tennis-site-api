@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\{
+    AnnouncementController,
     ArticleController,
     VideoController,
     CmsUserController,
@@ -107,6 +108,7 @@ Route::group(['prefix' => 'v1', 'middleware' => 'throttle:1000,1'], function () 
         Route::apiResource('leaders', LeaderController::class);
         Route::apiResource('careers', CareerController::class);
         Route::apiResource('annual-reports', AnnualReportController::class);
+        Route::apiResource('announcements', AnnouncementController::class);
         Route::apiResource('articles', ArticleController::class);
         Route::apiResource('videos', VideoController::class);
 
