@@ -13,12 +13,19 @@ class EventService
 
     public function index($request): Response
     {
-        $records = Event::orderBy('date', 'desc')
+        $hasDateRange = $request->filled('from_date') || $request->filled('to_date');
+        $records = Event::orderBy('date', $hasDateRange ? 'asc' : 'desc')
             ->when($request->filled('keyword'), function ($query) use ($request) {
                 $query->where('title', 'LIKE', '%' . $request->keyword . '%');
             })
             ->when(in_array($request->query('enabled'), ['0', '1'], true), function ($query) use ($request) {
                 $query->where('enabled', (int) $request->query('enabled'));
+            })
+            ->when($request->filled('from_date'), function ($query) use ($request) {
+                $query->whereDate('date', '>=', $request->from_date);
+            })
+            ->when($request->filled('to_date'), function ($query) use ($request) {
+                $query->whereDate('date', '<=', $request->to_date);
             })
             ->when($request->filled('all'), function ($query) {
                 return $query->get();
