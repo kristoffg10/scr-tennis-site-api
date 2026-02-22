@@ -37,6 +37,7 @@ class CmsUserService
         $sortBy         = $request->has('sortBy') ? $request->sortBy : 'updated_at';
         $sortDirection  = $request->has('sortDirection') && $request->sortDirection === 'asc' ? 'asc' : 'desc';
         $keyword        = $request->has('keyword') ? trim($request->keyword) : null;
+        $perPage        = $request->has('per_page') ? min((int) $request->per_page, 500) : $this->queryRows;
 
         $query = User::query()
             ->with(['role', 'userDetail'])
@@ -51,7 +52,7 @@ class CmsUserService
             });
         }
 
-        $records = $query->paginate($this->queryRows, ['*'], 'page', $page);
+        $records = $query->paginate($perPage, ['*'], 'page', $page);
 
         return response([
             'records' => $records,

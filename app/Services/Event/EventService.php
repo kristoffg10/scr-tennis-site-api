@@ -53,6 +53,11 @@ class EventService
             'scoring_format'  => $request->scoring_format ?? null,
             'assigned_coach'  => $request->assigned_coach ?? null,
             'event_status'    => $request->event_status ?? null,
+            'final_score'     => $request->final_score ?? null,
+            'winner_name'     => $request->winner_name ?? null,
+            'match_notes'     => $request->match_notes ?? null,
+            'team_one_label'  => $request->team_one_label ?? null,
+            'team_two_label'  => $request->team_two_label ?? null,
         ]);
 
         $galleryFiles = $request->file('event_gallery');
@@ -92,6 +97,11 @@ class EventService
             'scoring_format'  => $request->scoring_format ?? null,
             'assigned_coach'  => $request->assigned_coach ?? null,
             'event_status'    => $request->event_status ?? null,
+            'final_score'     => $request->final_score ?? null,
+            'winner_name'     => $request->winner_name ?? null,
+            'match_notes'     => $request->match_notes ?? null,
+            'team_one_label'  => $request->team_one_label ?? null,
+            'team_two_label'  => $request->team_two_label ?? null,
         ];
 
         if ($event->title !== $request->title) {

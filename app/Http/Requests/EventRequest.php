@@ -27,6 +27,12 @@ class EventRequest extends FormRequest
             // Host & management
             'assigned_coach'  => 'nullable|string|max:255',
             'event_status'    => 'nullable|string|in:draft,published,cancelled,completed',
+            // Match score (tennis)
+            'final_score'     => 'nullable|string|max:255',
+            'winner_name'     => 'nullable|string|max:255',
+            'match_notes'     => 'nullable|string|max:1000',
+            'team_one_label'  => 'nullable|string|max:255',
+            'team_two_label'  => 'nullable|string|max:255',
         ];
     }
 
